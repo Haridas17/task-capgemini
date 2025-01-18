@@ -1,0 +1,43 @@
+<div class="container">
+  <h3>Select a Country:</h3>
+  <form [formGroup]="countryForm" (ngSubmit)="addCountry()">
+    <select formControlName="country" required>
+      <option value="" disabled>Select a country</option>
+      <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
+    </select>
+    <button type="submit" [disabled]="!countryForm.valid">Submit</button>
+  </form>
+
+  <h3>Selected Countries:</h3>
+  <table border="1" class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Country</th>
+        <th>Inputs</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let country of selectedCountries; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ country.country }}</td>
+        <td>
+          <input type="number" [(ngModel)]="country.input1" (ngModelChange)="updateSum(country)">
+          <input type="number" [(ngModel)]="country.input2" (ngModelChange)="updateSum(country)">
+          <input type="number" [value]="country.input1 + country.input2" disabled>
+
+          <input type="number" [(ngModel)]="country.input4" (ngModelChange)="updateSum(country)">
+          <input type="number" [(ngModel)]="country.input5" (ngModelChange)="updateSum(country)">
+          <input type="number" [value]="country.input4 + country.input5" disabled>
+
+          <input type="number" [(ngModel)]="country.input7" (ngModelChange)="updateSum(country)">
+          <input type="number" [(ngModel)]="country.input8" (ngModelChange)="updateSum(country)">
+          <input type="number" [value]="country.input7 + country.input8" disabled>
+        </td>
+        
+        <td><button (click)="object(i)">Submit</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
